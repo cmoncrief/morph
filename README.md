@@ -1,7 +1,8 @@
 # Morph
 
 Morph is a lightweight collection of string transformations useful for converting between variable
-naming styles. It can operate on a single string or convert all of an object's keys to the new style.
+naming styles. In addition to strings, Morph can also take a hash as input and will output a new object
+with converted keys.
 
 ## Installation
 
