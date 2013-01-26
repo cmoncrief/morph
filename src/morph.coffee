@@ -46,7 +46,8 @@ toDashed = (input, cap) =>
   if typeof input is "object"
     return morphObj input, toDashed, cap
 
-  output = input.replace /([a-z\d])([A-Z])/g, '$1-$2'
+  output = input.replace /([A-Z\d])([A-Z][a-z\d])/g, '$1-$2'
+  output = output.replace /([a-z\d])([A-Z])/g, '$1-$2'
   output = output.replace /[_. ]/g, '-'
   output = output.toLowerCase()
   output = capFirst output if cap
