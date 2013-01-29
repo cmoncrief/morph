@@ -1,12 +1,15 @@
 assert = require 'assert'
 morph  = require '../lib/morph'
 
-
 describe 'Snake case', ->
 
   it 'should convert camel case to snake case', ->
     output = morph.toSnake "loremIpsumDolor"
     assert.equal output, "lorem_ipsum_dolor"
+
+  it 'should convert camel case with abbreviations to snake case', ->
+    output = morph.toSnake "NASAAndTheJPL"
+    assert.equal output, "nasa_and_the_jpl"
 
   it 'should convert human text to snake case', ->
     output = morph.toSnake "Lorem ipsum dolor"
@@ -38,6 +41,10 @@ describe 'Snake caps', ->
     output = morph.toSnakeCaps "loremIpsumDolor"
     assert.equal output, "LOREM_IPSUM_DOLOR"
 
+  it 'should convert camel case with abbreviations to snake caps', ->
+    output = morph.toSnakeCaps "NASAAndTheJPL"
+    assert.equal output, "NASA_AND_THE_JPL"
+
   it 'should convert human text to snake caps', ->
     output = morph.toSnakeCaps "Lorem ipsum dolor"
     assert.equal output, "LOREM_IPSUM_DOLOR"
@@ -63,6 +70,10 @@ describe 'Dashed', ->
   it 'should convert camel case to dashed', ->
     output = morph.toDashed "loremIpsumDolor"
     assert.equal output, "lorem-ipsum-dolor"
+
+  it 'should convert camel case with abbreviations to dashed', ->
+    output = morph.toDashed "NASAAndTheJPL"
+    assert.equal output, "nasa-and-the-jpl"
 
   it 'should convert human text to dashed', ->
     output = morph.toDashed "Lorem ipsum dolor"
@@ -162,6 +173,10 @@ describe 'Human', ->
     output = morph.toHuman 'loremIpsumDolor'
     assert.equal output, 'Lorem ipsum dolor'
 
+  it 'should convert camel case with abbreviations to human format', ->
+    output = morph.toHuman "NASAAndTheJPLHaveARocket"
+    assert.equal output, "NASA and the JPL have a rocket"
+
   it 'should convert hyphenated text to human format', ->
     output = morph.toHuman 'lorem-Ipsum-dolor'
     assert.equal output, 'Lorem ipsum dolor'
@@ -191,6 +206,10 @@ describe 'Title', ->
   it 'should convert camel case to title format', ->
     output = morph.toTitle 'loremIpsumDolor'
     assert.equal output, 'Lorem Ipsum Dolor'
+
+  it 'should convert camel case with abbreviations to title format', ->
+    output = morph.toTitle "NASAAndTheJPLHaveARocket"
+    assert.equal output, "NASA And The JPL Have A Rocket"
 
   it 'should convert hyphenated text to title format', ->
     output = morph.toTitle 'lorem-Ipsum-dolor'

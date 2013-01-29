@@ -23,7 +23,8 @@ toSnake = (input, cap) =>
   if typeof input is "object"
     return morphObj input, toSnake, cap
 
-  output = input.replace /([a-z\d])([A-Z])/g, '$1_$2'
+  output = input.replace /([A-Z\d])([A-Z][a-z\d])/g, '$1_$2'
+  output = output.replace /([a-z\d])([A-Z])/g, '$1_$2'
   output = output.replace /[-. ]/g, '_'
   output = output.toLowerCase()
   output = capFirst output if cap
@@ -78,9 +79,10 @@ toHuman = (input, cap = true) =>
     return morphObj input, toHuman
 
   output = input.replace /[-._]/g, ' '
+  output = output.replace /([A-Z\d])([A-Z][a-z\d])/g, '$1 $2'
   output = output.replace /([a-z])([A-Z])/g, '$1 $2'
-  output = output.replace /(A|I)([A-Z][a-z])/g, '$1 $2'
-  output = output.toLowerCase()
+  output = output.replace /(\s([a-zA-Z])\s)/g, (str, p1) -> "#{p1.toLowerCase()}"
+  output = output.replace /([A-Z])([a-z])/g, (str, p1, p2) -> "#{p1.toLowerCase()}#{p2}"
   output = if cap then capFirst output else lowerFirst output
   return output
 
