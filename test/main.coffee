@@ -1,6 +1,7 @@
 assert = require 'assert'
 morph  = require '../lib/morph'
 
+
 describe 'Snake case', ->
 
   it 'should convert camel case to snake case', ->
@@ -263,3 +264,9 @@ describe 'Object keys', ->
     assert tmp["Lorem Ipsum Dolor"]
     assert tmp["Sit Amet"]
 
+describe 'Recursive array to Snake case', ->
+
+  it 'should convert aray with camel case to snake case', ->
+    output = morph.toSnake {itemId: 1, children: [{childName: 'Georges'}, {childName: 'Steve'}]}
+    assert.equal output.item_id, 1
+    assert.equal output.children[0].child_name,  'Georges'
