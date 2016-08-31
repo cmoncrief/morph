@@ -5,7 +5,23 @@
 # Private function. Converts all object keys using the passed in function.
 morphObj = (input, caller, cap) ->
   newObj = {}
-  newObj[caller(key, cap)] = value for key, value of input
+
+  if Array.isArray(input)
+    newArray = []
+    for inputItem in input
+      newValue = caller(inputItem, cap)
+      newArray.push newValue
+
+    return newArray
+
+  for key, value of input
+    newObj[caller(key, cap)] = value
+    if typeof value == 'object'
+      newValue = caller(value, cap)
+    else
+      newValue = value
+
+    newObj[caller(key, cap)] = newValue;
   return newObj
 
 # Private function. Capitalizes the first letter of the first word.
